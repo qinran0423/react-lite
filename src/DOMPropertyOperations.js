@@ -1,6 +1,7 @@
 /**
  * DOM Property Operations
  */
+// 设置dom的工具函数
 
 import {
     properties,

@@ -1,20 +1,21 @@
 /**
  * DOM config
  */
-
+// 属性的名字开头的正则
 const ATTRIBUTE_NAME_START_CHAR = ':A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD'
 const ATTRIBUTE_NAME_CHAR = ATTRIBUTE_NAME_START_CHAR + '\\-.0-9\\uB7\\u0300-\\u036F\\u203F-\\u2040'
 
+// 属性名字的正则
 export const VALID_ATTRIBUTE_NAME_REGEX = new RegExp(
     '^[' + ATTRIBUTE_NAME_START_CHAR + '][' + ATTRIBUTE_NAME_CHAR + ']*$'
 )
-
+// data-和aria-开头的，是用户自定义的属性
 export const isCustomAttribute = RegExp.prototype.test.bind(
     new RegExp('^(data|aria)-[' + ATTRIBUTE_NAME_CHAR + ']*$')
 )
 // will merge some data in properties below
 export const properties = {}
-
+console.log('xx')
 /**
  * Mapping from normalized, camelcased property names to a configuration that
  * specifies how the associated DOM property should be accessed or rendered.

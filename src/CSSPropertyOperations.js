@@ -1,7 +1,7 @@
 /**
  * CSS Property Operations
  */
-
+// 循环设置元素的styles，调用setStyleValue设置每个值
 export function setStyle(elemStyle, styles) {
     for (let styleName in styles) {
         if (styles.hasOwnProperty(styleName)) {
@@ -9,7 +9,7 @@ export function setStyle(elemStyle, styles) {
         }
     }
 }
-
+// 删除css样式
 export function removeStyle(elemStyle, styles) {
     for (let styleName in styles) {
         if (styles.hasOwnProperty(styleName)) {
@@ -17,7 +17,7 @@ export function removeStyle(elemStyle, styles) {
         }
     }
 }
-
+// 对比newStyle和现有的样式，对比差异，设置css
 export function patchStyle(elemStyle, style, newStyle) {
     if (style === newStyle) {
         return
@@ -49,6 +49,7 @@ export function patchStyle(elemStyle, style, newStyle) {
 /**
  * CSS properties which accept numbers but are not in units of "px".
  */
+// 不需要加pc单位的
 const isUnitlessNumber = {
     animationIterationCount: 1,
     borderImageOutset: 1,
@@ -87,20 +88,26 @@ const isUnitlessNumber = {
     strokeOpacity: 1,
     strokeWidth: 1,
 }
-
 function prefixKey(prefix, key) {
     return prefix + key.charAt(0).toUpperCase() + key.substring(1)
 }
 
 let prefixes = ['Webkit', 'ms', 'Moz', 'O']
+// 加前缀，比如传入background，遍历prefixes ，变成
+//     WebkitBackground
+//     msBackground
+//     MozBackground
+//     OBackground
+// 四个 吧isUnitlessNumber扩充为带前缀的版本
 
 Object.keys(isUnitlessNumber).forEach(function(prop) {
     prefixes.forEach(function(prefix) {
         isUnitlessNumber[prefixKey(prefix, prop)] = 1
     })
 })
-
+// 数字的正则
 let RE_NUMBER = /^-?\d+(\.\d+)?$/
+// 设置css的函数，单位是否加px单位，然后直接elemStyle.background = 'red'或者.width='200px'
 function setStyleValue(elemStyle, styleName, styleValue) {
 
     if (!isUnitlessNumber[styleName] && RE_NUMBER.test(styleValue)) {
